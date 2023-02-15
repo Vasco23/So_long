@@ -6,31 +6,37 @@
 /*   By: vcacador <vcacador@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 16:29:21 by vcacador          #+#    #+#             */
-/*   Updated: 2022/11/25 15:44:58 by vcacador         ###   ########.fr       */
+/*   Updated: 2023/02/15 14:48:37 by vcacador         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/structs.h"
 
-int	makegound(t_mlx *mlx, void *floor, void *wall)
+int	makegound(void)
 {
-	int x;
-	int y;
+	int i;
+	int j;
+	/* int x = 0;
+	int y = 0; */
 
-	x = 0;
-	y = 0;
-	while (x < 640)
+	i = 0;
+	while (map()->map[i])
 	{
-		while (y < 832)
+		j = 0;
+		while (map()->map[i][j] != '\0')
 		{
-			if (x == 0 || y == 0 || x >= 576 || y >= 768)
-				mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, wall, x, y);
+			if (map()->map[i][j] == '1')
+				mlx_put_image_to_window(mlx()->mlx_ptr, mlx()->win_ptr, wall()->img, j * 64, i * 64);
+			/* else if (map()->map[i][j] == 'C')
+			{
+				mlx_put_image_to_window(mlx()->mlx_ptr, mlx()->win_ptr, floors()->img, j * 64, i * 64);
+				mlx_put_image_to_window(mlx()->mlx_ptr, mlx()->win_ptr, bomb()->img, j * 64, i * 64);
+			} */
 			else
-				mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, floor, x, y);
-			y += 64;
+				mlx_put_image_to_window(mlx()->mlx_ptr, mlx()->win_ptr, floors()->img, j * 64, i * 64);
+			j++;
 		}
-		y = 0;
-		x += 64;
+		i++;
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: vcacador <vcacador@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 15:35:08 by vcacador          #+#    #+#             */
-/*   Updated: 2022/11/25 15:45:04 by vcacador         ###   ########.fr       */
+/*   Updated: 2023/02/13 19:37:12 by vcacador         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,14 @@ int	wall_checker(char **map)
 	return (1);
 }
 
-int	*player_checker(char **map, int *pos)
+int	player_checker(char **map)
 {
 	int	i;
 	int	j;
-	int	player;
+	int	p;
 
 	i = 1;
-	player = 0;
+	p = 0;
 	while (map[i++])
 	{
 		j = 0;
@@ -54,18 +54,19 @@ int	*player_checker(char **map, int *pos)
 		{
 			if (map[i][j] == 'P')
 			{
-				player++;
-				if (player == 1)
-					pos = malloc(sizeof(int) * 2);
-				pos[0] = i;
-				pos[1] = j;
+				p++;
+				if (p == 1)
+				{
+					player()->x = i;
+					player()->y = j;
+				}
 			}
 			j++;
 		}
 	}
-	if (player == 1)
-		return (pos);
-	return (0);
+	if (p == 1)
+		return (1);
+	return (p);
 }
 
 int	exit_ok(char **map)
@@ -91,6 +92,7 @@ int	exit_ok(char **map)
 	if (exit == 1)
 		return (1);
 	return (0);
+	
 }
 
 int	colletibles(char **map)
@@ -115,16 +117,18 @@ int	colletibles(char **map)
 	return (collet);
 }
 
-int	map_rectangular(char **map)
+int	map_rectangular(char **maps)
 {
 	int	i;
 
 	i = 0;
-	while (map[i + 1])
+	map()->w = line_len(maps[i]);
+	while (maps[i + 1])
 	{
-		if (line_len(map[i]) - line_len(map[i + 1]) != 0)
+		if (line_len(maps[i]) - line_len(maps[i + 1]) != 0)
 			return (0);
 		i++;
 	}
+	map()->h = i;
 	return (1);
 }

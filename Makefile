@@ -6,14 +6,14 @@
 #    By: vcacador <vcacador@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/19 02:38:36 by vcacador          #+#    #+#              #
-#    Updated: 2022/11/26 20:03:40 by vcacador         ###   ########.fr        #
+#    Updated: 2023/02/10 19:05:54 by vcacador         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
 
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -Imlx -g
+CFLAGS = -Wall -Werror -Wextra -Imlx -g -fsanitize=address
 MILIB  = -I /usr/X11/include -g -L /usr/X11/lib -l minilibx-linux -framework OpenGL -framework AppKit
 
 MLX_LIB_DIR = mlx_linux/
@@ -43,7 +43,8 @@ SRC_NAME = 	main.c							\
 			ft_strncmp.c					\
 			get_maps.c						\
 			map_checker2.c					\
-			map_checker.c
+			map_checker.c					\
+			global_structs.c
 
 OBJS = $(addprefix $(OBJ_PATH)/, $(SRC_NAME:.c=.o))
 
