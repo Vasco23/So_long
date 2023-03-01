@@ -6,7 +6,7 @@
 /*   By: vcacador <vcacador@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:00:03 by vcacador          #+#    #+#             */
-/*   Updated: 2023/02/13 19:35:09 by vcacador         ###   ########.fr       */
+/*   Updated: 2023/02/24 15:55:59 by vcacador         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	path_ver_recurive(int x, int y);
 
 int		path_ver(void)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	x = 0;
 	printf("pos x = %d\n", player()->x);

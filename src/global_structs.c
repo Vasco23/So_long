@@ -42,3 +42,10 @@ t_bomb *bomb(void)
 	
 	return (&bomb);
 }
+
+t_glock *glock(void)
+{
+	static t_glock	glock;
+	
+	return (&glock);
+}

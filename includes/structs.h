@@ -6,7 +6,7 @@
 /*   By: vcacador <vcacador@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 15:16:04 by vcacador          #+#    #+#             */
-/*   Updated: 2023/02/15 00:33:56 by vcacador         ###   ########.fr       */
+/*   Updated: 2023/02/28 18:47:29 by vcacador         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,7 @@
 # include "../ft_printf/ft_printf.h"
 # include <math.h>
 
-typedef struct s_window
-{
-	void	*mlx_ptr;
-	void	*win_ptr;
-}		t_mlx;
+
 
 typedef struct s_map
 {
@@ -39,9 +35,27 @@ typedef struct s_map
 typedef struct s_bomb
 {
 	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;	
 	int		x;
 	int		y;
 }		t_bomb;
+
+typedef struct s_window
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+	t_bomb  canva;
+}		t_mlx;
+
+typedef struct t_glock
+{
+	void	*img;
+	int		x;
+	int		y;
+}		t_glock;
 
 typedef struct s_floors
 {
@@ -80,6 +94,7 @@ t_floors	*floors(void);
 t_wall		*wall(void);
 t_player 	*player(void);
 t_bomb 		*bomb(void);
+t_glock 	*glock(void);
 
 
 int		makegound(void);
@@ -95,5 +110,6 @@ t_game	*game(void);
 int		get_maps(char *file);
 int		path_ver(void);
 int		errors_and_map_check(char **map);
+void 	converter(void);
 
 #endif

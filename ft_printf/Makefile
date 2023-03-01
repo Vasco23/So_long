@@ -6,7 +6,7 @@
 #    By: vcacador <vcacador@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/08 11:03:01 by vcacador          #+#    #+#              #
-#    Updated: 2022/11/08 11:30:57 by vcacador         ###   ########.fr        #
+#    Updated: 2023/02/15 17:24:11 by vcacador         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ ft_checker ft_printf
 
 CC = cc
 RM = rm -f
-CFLAGS = -Wall -Werror -Wextra -I.
+CFLAGS = -Wall -Werror -Wextra -fPIE -I.
 
 all:$(NAME)
 
