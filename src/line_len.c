@@ -6,7 +6,7 @@
 /*   By: vcacador <vcacador@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 15:40:10 by vcacador          #+#    #+#             */
-/*   Updated: 2022/11/25 15:44:53 by vcacador         ###   ########.fr       */
+/*   Updated: 2023/03/19 14:40:19 by vcacador         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t	line_len(char *str)
 	int	i;
 
 	i = 0;
-	while (str[i] != '\n' && str[i])
+	while (str[i] && str[i] != '\n')
 		i++;
 	return (i);
 }

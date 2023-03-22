@@ -15,16 +15,16 @@ t_map	*map(void)
 	return (&map);
 }
 
-t_floors *floors(void)
+t_obj	*floors(void)
 {
-	static t_floors	floor;
+	static t_obj	floor;
 
 	return (&floor);
 }
 
-t_wall *wall(void)
+t_obj	*wall(void)
 {
-	static t_wall	wall;
+	static t_obj	wall;
 
 	return (&wall);
 }
@@ -34,18 +34,4 @@ t_player *player(void)
 	static t_player	player;
 
 	return (&player);
-}
-
-t_bomb *bomb(void)
-{
-	static t_bomb	bomb;
-	
-	return (&bomb);
-}
-
-t_glock *glock(void)
-{
-	static t_glock	glock;
-	
-	return (&glock);
 }

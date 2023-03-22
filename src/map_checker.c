@@ -6,7 +6,7 @@
 /*   By: vcacador <vcacador@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 15:35:08 by vcacador          #+#    #+#             */
-/*   Updated: 2023/03/01 17:08:04 by vcacador         ###   ########.fr       */
+/*   Updated: 2023/03/22 12:29:28 by vcacador         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int	wall_checker(char **map)
 	int	len;
 
 	i = 0;
-	len = line_len(map[i]);
+	if (map)
+		len = line_len(map[i]);
 	while (i < len - 1)
 	{
 		if (map[0][i] != '1')
@@ -26,7 +27,7 @@ int	wall_checker(char **map)
 		i++;
 	}
 	i = 1;
-	while (map[i + 1])
+	while (map && map[i + 1])
 	{
 		if (map[i][0] != '1')
 			return (0);
@@ -45,7 +46,7 @@ int	player_checker(char **map)
 	int	j;
 	int	p;
 
-	i = 1;
+	i = 0;
 	p = 0;
 	while (map[i++])
 	{
@@ -57,8 +58,8 @@ int	player_checker(char **map)
 				p++;
 				if (p == 1)
 				{
-					player()->x = i;
-					player()->y = j;
+					player()->x = j;
+					player()->y = i;
 				}
 			}
 			j++;
@@ -95,7 +96,7 @@ int	exit_ok(char **map)
 	
 }
 
-int	colletibles(char **map)
+int	colletibles(char **maps)
 {
 	int	i;
 	int	j;
@@ -104,16 +105,17 @@ int	colletibles(char **map)
 	i = -1;
 	j = 0;
 	collet = 0;
-	while (map[++i])
+	while (maps[++i])
 	{
 		j = 0;
-		while (map[i][j])
+		while (maps[i][j])
 		{
-			if (map[i][j] == 'B' || map[i][j] == 'C')
+			if (maps[i][j] == 'C')
 				collet++;
 			j++;
 		}
 	}
+	map()->collect = collet;
 	return (collet);
 }
 
@@ -123,6 +125,11 @@ int	map_rectangular(char **maps)
 
 	i = 0;
 	map()->w = line_len(maps[i]);
+	while (maps[i])
+		i++;
+	if (i < 3)
+		return (0);
+	i = 0;
 	while (maps[i + 1])
 	{
 		if (line_len(maps[i]) - line_len(maps[i + 1]) != 0)

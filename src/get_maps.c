@@ -6,11 +6,11 @@
 /*   By: vcacador <vcacador@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 12:31:56 by vcacador          #+#    #+#             */
-/*   Updated: 2023/02/13 19:29:18 by vcacador         ###   ########.fr       */
+/*   Updated: 2023/03/19 15:08:05 by vcacador         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/structs.h"
+#include <structs.h>
 
 static int	read_map(char *file);
 static int	line_counter(char *file);
@@ -26,7 +26,7 @@ int		get_maps(char *file)
 	fd = open(file, O_RDONLY);
 	if (read_map(file) == 0)
 	{
-		while (fd > 0)
+		while (fd >= 0)
 		{
 			map()->map[i] = get_next_line(fd);
 			map()->temp[i] = ft_strcpy(map()->map[i]);
@@ -70,6 +70,16 @@ static int	line_counter(char *file)
 
 	counter = 0;
 	fd = open(file, O_RDONLY);
+	temp = get_next_line(fd);
+	if (!temp)
+	{
+		free(temp);
+		return (2);
+	}
+	else
+		free(temp);
+	close(fd);
+	fd = open(file, O_RDONLY);
 	while (fd != -1)
 	{
 		temp = get_next_line(fd);
@@ -86,9 +96,11 @@ static int	read_map(char *file)
 {
 	int		nbr_lines;
 
+	if(line_counter(file) == 2)
+		return (1);
 	nbr_lines = line_counter(file);
 	if (nbr_lines > 0)
-	{	
+	{
 		map()->map = malloc(sizeof(char *) * (nbr_lines + 1));
 		map()->temp = malloc(sizeof(char *) * (nbr_lines + 1));
 		if (!map()->map || !map()->temp)

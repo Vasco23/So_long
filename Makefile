@@ -6,11 +6,31 @@
 #    By: vcacador <vcacador@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/19 02:38:36 by vcacador          #+#    #+#              #
-#    Updated: 2023/02/10 19:05:54 by vcacador         ###   ########.fr        #
+#    Updated: 2023/03/22 12:37:20 by vcacador         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
+
+SRC_NAME = 	main.c							\
+			get_next_line.c					\
+			get_next_line_utils.c			\
+			line_len.c						\
+			makeground.c					\
+			ft_strncmp.c					\
+			get_maps.c						\
+			map_checker2.c					\
+			map_checker.c					\
+			global_structs.c				\
+			global_structs_2.c				\
+			image_utils.c					\
+			make_addr.c						\
+			collision.c						\
+			ft_itoa.c 						\
+			bad_guys.c						\
+			run.c							\
+			utils.c							\
+			bad_guys_walk.c					
 
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra -Imlx -g -fsanitize=address
@@ -29,22 +49,11 @@ HEADER = so_long.h
 FT_PRINTF = ./ft_printf/libftprintf.a
 FT_PRINTF_PATH = ./ft_printf
 
-INC = -I ./includes
+INC = -Iincludes -I/usr/include -Imlx_linux
 
 SRC_PATH = ./src
 
 OBJ_PATH = ./objects
-
-SRC_NAME = 	main.c							\
-			get_next_line.c					\
-			get_next_line_utils.c			\
-			line_len.c						\
-			makeground.c					\
-			ft_strncmp.c					\
-			get_maps.c						\
-			map_checker2.c					\
-			map_checker.c					\
-			global_structs.c
 
 OBJS = $(addprefix $(OBJ_PATH)/, $(SRC_NAME:.c=.o))
 
@@ -56,29 +65,23 @@ all: $(NAME)
 $(NAME) : $(FT_PRINTF) $(OBJS)
 	make -s -C mlx_linux/
 	$(CC) $(CFLAGS) $(OBJS) $(FT_PRINTF) $(INC) $(LMLX_FLAGS) $(MLX_INCLUDE) -o $(NAME)
-	@echo "\033[1;36m[COMPILED]\033[0m"
 
-$(FT_PRINTF): $(shell make -C $(FT_PRINTF_PATH) -q libftprintf.a || echo force)
+$(FT_PRINTF): $(shell make -C $(FT_PRINTF_PATH) -q)
 	make -C$(FT_PRINTF_PATH)
 
 $(OBJ_PATH)/%.o : $(SRC_PATH)/%.c $(MLX_LIB)
 	mkdir -p objects
-	$(CC) -c $(CFLAGS) $(LMLX_FLAGS) $(INCLUDES) $(MLX_INCLUDE) $< -o $@
+	$(CC) -c $(CFLAGS) $(LMLX_FLAGS) $(INC) $(MLX_INCLUDE)  $< -o $@
 
-norminette:
-	clear
-	norminette | egrep -B1 'Error|Warning' | sed ''/Error/s//$(printf "\033[31m\033[4mError\033[0m")/'' | sed ''/Warning/s//$(printf "\033[33m\033[4mWarning\033[0m")/''
 
 clean:
 	make clean -C $(FT_PRINTF_PATH)
 	rm -rf $(OBJ_PATH)
-	echo "\033[33mall $(NAME).o files are removed\033[0m"
 
 fclean: clean
 	make fclean -C $(FT_PRINTF_PATH)
 	rm -f $(NAME)
-	echo "\033[31m$(NAME) is deleted\033[0m"
 
 re: fclean all
 
-.PHONY: all clean fclean re force norminette
+.PHONY: all clean fclean re
