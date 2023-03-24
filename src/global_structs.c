@@ -1,9 +1,20 @@
-#include "../includes/structs.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   global_structs.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vcacador <vcacador@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/22 14:13:43 by vcacador          #+#    #+#             */
+/*   Updated: 2023/03/24 13:42:31 by vcacador         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "structs.h"
 
-t_mlx *mlx(void)
+t_window	*data(void)
 {
-	static t_mlx	mlx;
+	static t_window	mlx;
 
 	return (&mlx);
 }
@@ -29,7 +40,7 @@ t_obj	*wall(void)
 	return (&wall);
 }
 
-t_player *player(void)
+t_player	*player(void)
 {
 	static t_player	player;
 

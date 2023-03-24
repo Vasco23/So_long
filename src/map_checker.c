@@ -6,7 +6,7 @@
 /*   By: vcacador <vcacador@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 15:35:08 by vcacador          #+#    #+#             */
-/*   Updated: 2023/03/22 12:29:28 by vcacador         ###   ########.fr       */
+/*   Updated: 2023/03/24 16:58:42 by vcacador         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,6 @@ int	player_checker(char **map)
 			j++;
 		}
 	}
-	if (p == 1)
-		return (1);
 	return (p);
 }
 
@@ -93,7 +91,7 @@ int	exit_ok(char **map)
 	if (exit == 1)
 		return (1);
 	return (0);
-	
+
 }
 
 int	colletibles(char **maps)

@@ -6,7 +6,7 @@
 #    By: vcacador <vcacador@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/19 02:38:36 by vcacador          #+#    #+#              #
-#    Updated: 2023/03/22 12:37:20 by vcacador         ###   ########.fr        #
+#    Updated: 2023/03/24 17:12:45 by vcacador         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,8 +42,6 @@ MLX_INCLUDE = -I mlx_linux/
 LMLX_FLAGS = -L$(MLX_LIB_DIR) -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz -fPIC
 RM = rm -f
 
-$(VERBOSE).SILENT:
-
 HEADER = so_long.h
 
 FT_PRINTF = ./ft_printf/libftprintf.a
@@ -71,7 +69,7 @@ $(FT_PRINTF): $(shell make -C $(FT_PRINTF_PATH) -q)
 
 $(OBJ_PATH)/%.o : $(SRC_PATH)/%.c $(MLX_LIB)
 	mkdir -p objects
-	$(CC) -c $(CFLAGS) $(LMLX_FLAGS) $(INC) $(MLX_INCLUDE)  $< -o $@
+	$(CC) -c $(CFLAGS) $(LMLX_FLAGS) $(INC) $(MLX_INCLUDE) $< -o $@
 
 
 clean:

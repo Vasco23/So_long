@@ -6,7 +6,7 @@
 /*   By: vcacador <vcacador@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:00:03 by vcacador          #+#    #+#             */
-/*   Updated: 2023/03/22 12:32:07 by vcacador         ###   ########.fr       */
+/*   Updated: 2023/03/24 13:11:23 by vcacador         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	path_ver_recurive(int x, int y);
 
-int		path_ver(void)
+int	path_ver(void)
 {
 	int	x;
 	int	y;
@@ -37,7 +37,7 @@ int		path_ver(void)
 	return (1);
 }
 
- void	path_ver_recurive(int x, int y)
+void	path_ver_recurive(int x, int y)
 {
 	if (map()->temp[x + 1][y] != '1' && map()->temp[x + 1][y] != 'z')
 	{
@@ -61,19 +61,20 @@ int		path_ver(void)
 	}
 }
 
-int map_name_2(char *str)
+int	map_name_2(char *str)
 {
-	int fd;
+	int	fd;
+
 	fd = open(str, O_RDONLY);
 	if (fd == -1)
 		return (1);
 	return (0);
 }
 
-int map_name(char *str, char *str2, int ac)
+int	map_name(char *str, char *str2, int ac)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = ft_strlen(str) - 4;
 	j = 0;
@@ -94,7 +95,6 @@ int map_name(char *str, char *str2, int ac)
 	return (0);
 }
 
- 
 int	errors_and_map_check(char **map)
 {
 	if (map_rectangular(map) == 0)

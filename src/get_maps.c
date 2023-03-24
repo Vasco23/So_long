@@ -6,7 +6,7 @@
 /*   By: vcacador <vcacador@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 12:31:56 by vcacador          #+#    #+#             */
-/*   Updated: 2023/03/19 15:08:05 by vcacador         ###   ########.fr       */
+/*   Updated: 2023/03/24 18:12:49 by vcacador         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,34 @@ static int	read_map(char *file);
 static int	line_counter(char *file);
 static char	*ft_strcpy(char *str1);
 
-
-int		get_maps(char *file)
+int	get_maps(char *file)
 {
 	int	fd;
 	int	i;
 
-	i = 0;
+	i = read_map(file);
 	fd = open(file, O_RDONLY);
-	if (read_map(file) == 0)
+	if (i == 2)
 	{
+		close(fd);
+		return (2);
+	}
+	else if (i == 1)
+	{
+		close(fd);
+		return (1);
+	}
+	else
+	{
+		i = 0;
 		while (fd >= 0)
 		{
 			map()->map[i] = get_next_line(fd);
 			map()->temp[i] = ft_strcpy(map()->map[i]);
-			if (!map()->map[i])
+			if (!map()->map[i++])
 				break ;
-			i++;
 		}
 	}
-	else
-		return (1);
 	close(fd);
 	return (0);
 }
@@ -45,7 +52,6 @@ static char	*ft_strcpy(char *str1)
 {
 	int		i;
 	char	*tmp;
-
 
 	i = 0;
 	if (!str1)
@@ -72,19 +78,15 @@ static int	line_counter(char *file)
 	fd = open(file, O_RDONLY);
 	temp = get_next_line(fd);
 	if (!temp)
-	{
-		free(temp);
 		return (2);
-	}
-	else
-		free(temp);
+	free(temp);
 	close(fd);
 	fd = open(file, O_RDONLY);
 	while (fd != -1)
 	{
 		temp = get_next_line(fd);
 		if (!temp)
-			break ;	
+			break ;
 		free(temp);
 		counter++;
 	}
@@ -96,8 +98,8 @@ static int	read_map(char *file)
 {
 	int		nbr_lines;
 
-	if(line_counter(file) == 2)
-		return (1);
+	if (line_counter(file) == 2)
+		return (2);
 	nbr_lines = line_counter(file);
 	if (nbr_lines > 0)
 	{
